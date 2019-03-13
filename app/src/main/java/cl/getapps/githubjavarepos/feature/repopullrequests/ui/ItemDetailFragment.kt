@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import cl.getapps.githubjavarepos.R
 import cl.getapps.githubjavarepos.dummy.DummyContent
-import cl.getapps.githubjavarepos.feature.repos.domain.Repo
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -32,7 +31,7 @@ class ItemDetailFragment : Fragment() {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
-                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+                item = DummyContent.ITEM_MAP[it.getString(ARG_ITEM_ID)!!]
                 activity?.toolbar_layout?.title = item?.name
             }
         }
