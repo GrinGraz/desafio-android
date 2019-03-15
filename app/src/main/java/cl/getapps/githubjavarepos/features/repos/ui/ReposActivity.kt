@@ -1,12 +1,14 @@
 package cl.getapps.githubjavarepos.features.repos.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
+import cl.getapps.githubjavarepos.core.data.StateData
+import cl.getapps.githubjavarepos.core.ui.FeatureView
+import cl.getapps.githubjavarepos.core.ui.state.ViewState
 import cl.getapps.githubjavarepos.features.repos.data.remote.ReposParams
 import cl.getapps.githubjavarepos.features.repos.domain.model.RepoModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -19,7 +21,14 @@ import org.koin.android.scope.ext.android.getOrCreateScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class ReposActivity : AppCompatActivity() {
+class ReposActivity : AppCompatActivity(), FeatureView {
+    override fun render(viewState: ViewState) {
+        when (viewState) {
+            is ViewState.Loading -> TODO("not implemented")
+            is ViewState.Showing -> TODO("not implemented")
+            is ViewState.Error -> TODO("not implemented")
+        }
+    }
 
     private var pageParam: Int = 0
     private var loadingFromServer: Boolean = false
@@ -64,24 +73,29 @@ class ReposActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        reposViewModel.getReposLiveData().observe(this, Observer<MutableList<RepoModel>> { repos ->
-            if (repos.isNotEmpty() && repos[0].name != "Error") setRecyclerViewData(repos)
-            else if (repos[0].name == "Error") showSnackBar("Error loading items :(", isError = true)
-        })
+        reposViewModel.repos.observe(this, Observer { repos -> handleReposState(repos) })
     }
 
-    private fun loadRepos() = if (!loadingFromServer) {
-        loadingFromServer = true
-        pageParam++
-        reposViewModel.fetchRepos(ReposParams(pageParam.toString()))
-        showSnackBar("Loading items...", isError = false)
-    } else {
-        showSnackBar("Loading more items...", isError = false)
+    private fun handleReposState(repos: StateData?) {
+        when (repos) {
+            is StateData.Loading ->/* if (!loadingFromServer) showSnackBar("Loading items...") else showSnackBar("Loading more items...")*/ ""
+            is StateData.Success<*> -> setRecyclerViewData(repos.data as MutableList<RepoModel>)
+            is StateData.Error -> showSnackBar("Error loading items :C", isError = true)
+        }
     }
 
-    private fun showSnackBar(message: String, isError: Boolean) {
+    private fun loadRepos() {
+        if (!loadingFromServer) {
+            loadingFromServer = true
+            pageParam++
+            reposViewModel.fetchRepos(ReposParams(pageParam.toString()))
+        }
+    }
+
+    private fun showSnackBar(message: String, isError: Boolean = false) {
         snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.run {
             if (isError) setAction("Retry") {
+                loadingFromServer = false
                 loadRepos()
             }.show() else show()
         }

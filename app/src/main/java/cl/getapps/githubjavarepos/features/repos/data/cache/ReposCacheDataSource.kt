@@ -1,8 +1,6 @@
 package cl.getapps.githubjavarepos.features.repos.data.cache
 
 
-import cl.getapps.githubjavarepos.features.repopullrequests.data.entity.PullRequestsResponse
-import cl.getapps.githubjavarepos.features.repopullrequests.data.remote.PullRequestParams
 import cl.getapps.githubjavarepos.features.repos.data.entity.ReposResponse
 import cl.getapps.githubjavarepos.features.repos.data.remote.ReposParams
 import cl.getapps.githubjavarepos.features.repos.data.source.CacheDataSource

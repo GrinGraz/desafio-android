@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.getapps.githubjavarepos.R
+import cl.getapps.githubjavarepos.core.ui.FeatureView
+import cl.getapps.githubjavarepos.core.ui.state.ViewState
 import cl.getapps.githubjavarepos.features.repopullrequests.data.remote.PullRequestParams
 import cl.getapps.githubjavarepos.features.repopullrequests.domain.model.PullRequestModel
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -18,7 +20,14 @@ import org.koin.android.scope.ext.android.getOrCreateScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class PullRequestsActivity : AppCompatActivity() {
+class PullRequestsActivity : AppCompatActivity(), FeatureView {
+    override fun render(viewState: ViewState) {
+        when(viewState){
+            is ViewState.Loading -> TODO("not implemented")
+            is ViewState.Showing -> TODO("not implemented")
+            is ViewState.Error -> TODO("not implemented")
+        }
+    }
 
     private var pageParam: Int = 1
     private var loadingFromServer: Boolean = false
