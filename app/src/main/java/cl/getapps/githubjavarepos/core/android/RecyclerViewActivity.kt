@@ -4,16 +4,22 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
+import cl.getapps.githubjavarepos.features.repopullrequests.ui.BaseAdapter
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.item_list.*
 
 
-abstract class RecyclerViewActivity<Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>, Model> : BaseActivity() {
+abstract class RecyclerViewActivity<Adapter : BaseAdapter<Model>, Model> : BaseActivity() {
 
     lateinit var layoutManager: LinearLayoutManager
     open lateinit var recyclerViewAdapter: Adapter
 
-    protected var snackBar: Snackbar? = null
+    var loadingFromServer: Boolean = false
+
+    var pageParam: Int = 1
+
+    private var snackBar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +60,24 @@ abstract class RecyclerViewActivity<Adapter : RecyclerView.Adapter<RecyclerView.
         })
     }
 
-    abstract fun loadItems()
+    fun showSnackBar(message: String, isError: Boolean = false) {
+        snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.run {
+            if (isError) setAction("Retry") {
+                loadingFromServer = false
+                loadItems()
+            }.show() else show()
+        }
+    }
 
-    abstract fun setItems(items: MutableList<Model>)
+    open fun loadItems(){
+        if (loadingFromServer) return else loadingFromServer = true
+    }
+
+    fun setItems(items: List<Model>){
+        recyclerViewAdapter.values.addAll(items)
+        recyclerViewAdapter.notifyDataSetChanged()
+        loadingFromServer = false
+        pageParam++
+        snackBar?.dismiss()
+    }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cl.getapps.githubjavarepos.core.data.StateData
 import cl.getapps.githubjavarepos.features.repos.data.remote.ReposParams
+import cl.getapps.githubjavarepos.features.repos.domain.model.Repos
 import cl.getapps.githubjavarepos.features.repos.domain.usecase.GetRepos
 import io.reactivex.disposables.Disposable
 

@@ -3,7 +3,6 @@ package cl.getapps.githubjavarepos.features.repopullrequests.ui
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import cl.getapps.githubjavarepos.R
 import cl.getapps.githubjavarepos.core.android.RecyclerViewActivity
 import cl.getapps.githubjavarepos.core.data.StateData
 import cl.getapps.githubjavarepos.core.ui.FeatureView
@@ -16,9 +15,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class PullRequestsActivity : RecyclerViewActivity<PullRequestsRecyclerViewAdapter, PullRequestModel>(), FeatureView {
-
-    private var pageParam: Int = 1
-    private var loadingFromServer: Boolean = false
 
     override var recyclerViewAdapter = PullRequestsRecyclerViewAdapter()
 
@@ -44,31 +40,12 @@ class PullRequestsActivity : RecyclerViewActivity<PullRequestsRecyclerViewAdapte
     }
 
     override fun loadItems() {
-        if (!loadingFromServer) {
-            loadingFromServer = true
-            pageParam++
-            pullRequestsViewModel.fetchPullRequests(
-                PullRequestParams(
-                    intent.getStringExtra(ARGS.REPO_OWNER),
-                    intent.getStringExtra(ARGS.REPO_NAME)
-                )
+        pullRequestsViewModel.fetchPullRequests(
+            PullRequestParams(
+                intent.getStringExtra(ARGS.REPO_OWNER),
+                intent.getStringExtra(ARGS.REPO_NAME)
             )
-        }
-    }
-
-    override fun setItems(items: MutableList<PullRequestModel>) {
-        recyclerViewAdapter.values.addAll(items)
-        recyclerViewAdapter.notifyDataSetChanged()
-        loadingFromServer = false
-        snackBar?.dismiss()
-    }
-
-    private fun showSnackBar(message: String, isError: Boolean = false) {
-        snackBar?.setText(message)?.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE)?.run {
-            if (isError) setAction("Retry") {
-                loadItems()
-            }.show() else show()
-        }
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

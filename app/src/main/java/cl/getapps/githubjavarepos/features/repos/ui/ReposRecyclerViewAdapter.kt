@@ -8,16 +8,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
 import cl.getapps.githubjavarepos.core.extension.loadFromUrl
+import cl.getapps.githubjavarepos.features.repopullrequests.ui.BaseAdapter
 import cl.getapps.githubjavarepos.features.repopullrequests.ui.PullRequestsActivity
 import cl.getapps.githubjavarepos.features.repos.domain.model.RepoModel
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.repo_list_content.view.*
 
-class ReposRecyclerViewAdapter :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ReposRecyclerViewAdapter : BaseAdapter<RepoModel>() {
 
     private val onClickListener: View.OnClickListener
-    var values: MutableList<RepoModel> = mutableListOf()
 
     init {
         onClickListener = View.OnClickListener { v ->
