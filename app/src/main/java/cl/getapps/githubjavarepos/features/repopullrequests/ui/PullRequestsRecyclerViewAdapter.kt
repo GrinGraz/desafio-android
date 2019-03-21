@@ -12,7 +12,7 @@ import cl.getapps.githubjavarepos.features.repopullrequests.domain.model.PullReq
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.pull_list_content.view.*
 
-class PullRequestsRecyclerViewAdapter : RecyclerView.Adapter<PullRequestsRecyclerViewAdapter.ViewHolder>() {
+class PullRequestsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var values: MutableList<PullRequestModel> = mutableListOf()
 
@@ -22,8 +22,9 @@ class PullRequestsRecyclerViewAdapter : RecyclerView.Adapter<PullRequestsRecycle
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = values[position]
+        holder as ViewHolder
         holder.title.text = item.title
         holder.description.text = if (item.body.isNotEmpty()) item.body else "No description"
         holder.owner.text = item.user.login

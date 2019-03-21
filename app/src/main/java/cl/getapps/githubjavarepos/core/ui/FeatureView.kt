@@ -1,8 +1,8 @@
 package cl.getapps.githubjavarepos.core.ui
 
-import cl.getapps.githubjavarepos.core.ui.state.ViewState
+import cl.getapps.githubjavarepos.core.data.StateData
 
 
 interface FeatureView {
-    fun render(viewState: ViewState)
+    fun render(stateData: StateData)
 }
