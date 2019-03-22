@@ -1,6 +1,7 @@
 package cl.getapps.githubjavarepos.core.android
 
 import android.os.Bundle
+import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
@@ -69,13 +70,14 @@ abstract class RecyclerViewActivity<Adapter : BaseAdapter<Model>, Model> : BaseA
         }
     }
 
-    open fun loadItems(){
+    @CallSuper
+    open fun loadItems() {
         if (loadingFromServer) return else loadingFromServer = true
     }
 
-    fun setItems(items: List<Model>){
+    fun setItems(items: List<Model>) {
         recyclerViewAdapter.values.addAll(items)
-        recyclerViewAdapter.notifyDataSetChanged()
+        recyclerViewAdapter.notifyItemRangeInserted(recyclerViewAdapter.itemCount, items.size)
         loadingFromServer = false
         pageParam++
         snackBar?.dismiss()

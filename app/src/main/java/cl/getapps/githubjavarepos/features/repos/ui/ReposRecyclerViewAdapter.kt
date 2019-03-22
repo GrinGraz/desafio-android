@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
+import cl.getapps.githubjavarepos.core.android.BaseAdapter
 import cl.getapps.githubjavarepos.core.extension.loadFromUrl
-import cl.getapps.githubjavarepos.features.repopullrequests.ui.BaseAdapter
 import cl.getapps.githubjavarepos.features.repopullrequests.ui.PullRequestsActivity
 import cl.getapps.githubjavarepos.features.repos.domain.model.RepoModel
 import de.hdodenhof.circleimageview.CircleImageView

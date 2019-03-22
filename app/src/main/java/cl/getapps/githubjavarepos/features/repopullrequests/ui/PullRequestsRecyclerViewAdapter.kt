@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
+import cl.getapps.githubjavarepos.core.android.BaseAdapter
 import cl.getapps.githubjavarepos.core.extension.loadFromUrl
 import cl.getapps.githubjavarepos.features.repopullrequests.domain.model.PullRequestModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -36,8 +37,4 @@ class PullRequestsRecyclerViewAdapter : BaseAdapter<PullRequestModel>() {
         val owner: TextView = view.pull_item_author
         val ownerAvatar: CircleImageView = view.pull_item_image
     }
-}
-
-abstract class BaseAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var values = mutableListOf<T>()
 }
