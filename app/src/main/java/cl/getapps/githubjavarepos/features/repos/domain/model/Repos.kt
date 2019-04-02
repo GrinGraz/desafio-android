@@ -1,9 +1,7 @@
 package cl.getapps.githubjavarepos.features.repos.domain.model
 
 
-data class Repos(
-    val items: List<RepoModel>
-)
+data class Repos(val items: MutableList<RepoModel>)
 
 data class RepoModel(
     val name: String?,
