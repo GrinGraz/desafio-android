@@ -11,18 +11,15 @@ import org.koin.android.scope.ext.android.bindScope
 import org.koin.android.scope.ext.android.getOrCreateScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ReposActivity : RecyclerViewActivity<ReposRecyclerViewAdapter, RepoModel>(), FeatureView {
+class ReposActivity : RecyclerViewActivity<ReposRecyclerViewAdapter, RepoModel>(), FeatureView, FeatureView.Pageable {
 
     override var recyclerViewAdapter = ReposRecyclerViewAdapter()
-
     private val reposViewModel: ReposViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindScope(getOrCreateScope("Repos"))
-
         setupViewModel()
-
         loadItems()
     }
 

@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
-import cl.getapps.githubjavarepos.core.android.BaseAdapter
+import cl.getapps.githubjavarepos.core.android.BaseRecyclerViewAdapter
 import cl.getapps.githubjavarepos.core.extension.loadFromUrl
 import cl.getapps.githubjavarepos.features.repopullrequests.ui.PullRequestsActivity
 import cl.getapps.githubjavarepos.features.repos.domain.model.RepoModel
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.repo_list_content.view.*
 
-class ReposRecyclerViewAdapter : BaseAdapter<RepoModel>() {
+class ReposRecyclerViewAdapter : BaseRecyclerViewAdapter<RepoModel>() {
 
     private val onClickListener: View.OnClickListener
 

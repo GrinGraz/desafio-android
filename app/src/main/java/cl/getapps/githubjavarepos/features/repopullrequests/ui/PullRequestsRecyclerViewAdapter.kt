@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
-import cl.getapps.githubjavarepos.core.android.BaseAdapter
+import cl.getapps.githubjavarepos.core.android.BaseRecyclerViewAdapter
 import cl.getapps.githubjavarepos.core.extension.loadFromUrl
 import cl.getapps.githubjavarepos.features.repopullrequests.domain.model.PullRequestModel
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.pull_list_content.view.*
 
-class PullRequestsRecyclerViewAdapter : BaseAdapter<PullRequestModel>() {
+class PullRequestsRecyclerViewAdapter : BaseRecyclerViewAdapter<PullRequestModel>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

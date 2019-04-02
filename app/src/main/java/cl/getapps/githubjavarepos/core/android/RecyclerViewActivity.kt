@@ -5,13 +5,13 @@ import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cl.getapps.githubjavarepos.R
-import cl.getapps.githubjavarepos.features.repopullrequests.ui.BaseAdapter
+import cl.getapps.githubjavarepos.core.ui.FeatureView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.item_list.*
 
 
-abstract class RecyclerViewActivity<Adapter : BaseAdapter<Model>, Model> : BaseActivity() {
+abstract class RecyclerViewActivity<Adapter : BaseRecyclerViewAdapter<Model>, Model> : BaseActivity() {
 
     lateinit var layoutManager: LinearLayoutManager
     open lateinit var recyclerViewAdapter: Adapter
@@ -22,6 +22,8 @@ abstract class RecyclerViewActivity<Adapter : BaseAdapter<Model>, Model> : BaseA
 
     private var snackBar: Snackbar? = null
 
+    override fun getLayoutId(): Int = R.layout.activity_item_list
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +31,11 @@ abstract class RecyclerViewActivity<Adapter : BaseAdapter<Model>, Model> : BaseA
 
         setupRecyclerView()
 
-        addPagination()
+        if (this is FeatureView.Pageable) addPagination()
+    }
+
+    override fun makeSnackBar() {
+        snackBar = Snackbar.make(item_list, "", Snackbar.LENGTH_INDEFINITE)
     }
 
     private fun setupRecyclerView() {
@@ -39,12 +45,6 @@ abstract class RecyclerViewActivity<Adapter : BaseAdapter<Model>, Model> : BaseA
         val itemDividerDecoration = resources.getDimension(R.dimen.item_separator_height).toInt()
         item_list.addItemDecoration(ItemDivider(itemDividerDecoration))
         item_list.adapter = recyclerViewAdapter
-    }
-
-    override fun getLayoutId(): Int = R.layout.activity_item_list
-
-    override fun makeSnackBar() {
-        snackBar = Snackbar.make(item_list, "", Snackbar.LENGTH_INDEFINITE)
     }
 
     private fun addPagination() {
