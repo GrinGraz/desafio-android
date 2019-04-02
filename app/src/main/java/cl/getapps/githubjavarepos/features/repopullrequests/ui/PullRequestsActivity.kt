@@ -40,6 +40,7 @@ class PullRequestsActivity : RecyclerViewActivity<PullRequestsRecyclerViewAdapte
     }
 
     override fun loadItems() {
+        super.loadItems()
         pullRequestsViewModel.fetchPullRequests(
             PullRequestParams(
                 intent.getStringExtra(ARGS.REPO_OWNER),
