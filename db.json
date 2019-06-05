@@ -1,4 +1,4 @@
-[
+{"mysales":[
     {
         "status": "ACCEPTED_BY_SELLER",
         "statusDescription": "Venta Aceptada",
@@ -12,4 +12,4 @@
         "rejectLink": "https://www.poya1.cl/payment-delivery/app/seller/info?id=m17v43y3HsYXc6oglCjrRXBCpmfgknBuOz-me3vYvcVdJy4=",
         "countDown": 360
     }
-]
+]}
