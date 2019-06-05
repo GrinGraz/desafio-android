@@ -1,0 +1,15 @@
+[
+    {
+        "status": "ACCEPTED_BY_SELLER",
+        "statusDescription": "Venta Aceptada",
+        "orderNumber": "4379",
+        "statusDate": "2019-05-16T15:35:57.620085Z",
+        "adTitle": "Xbox 360 -1",
+        "adImage": "https://img.poya1.cl/images/34/3466316621.jpg",
+        "adID": "123123123",
+        "agreedPrice": "100000",
+        "acceptLink": "https://www.poya1.cl/payment-delivery/app/seller/info?id=m17v43y3HsYXc6oglCjrRXBCpmfgknBuOz-me3vYvcVdJy4=",
+        "rejectLink": "https://www.poya1.cl/payment-delivery/app/seller/info?id=m17v43y3HsYXc6oglCjrRXBCpmfgknBuOz-me3vYvcVdJy4=",
+        "countDown": 360
+    }
+]
